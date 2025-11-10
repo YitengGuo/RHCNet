@@ -1,14 +1,11 @@
-# A Novel Underwater Detection Method for Ambiguous Object Finding via Distraction Mining
+# RHCNet: Residual-Guided Hierarchical Calibration Network for Robust Underwater Object Detection
 
-This repository contains the code (in PyTorch) for the paper: ([IEEE TII](https://ieeexplore.ieee.org/document/10496913))
+This repository contains the code (in PyTorch) 
 
-If you use this code, please cite our paper, and hit the star at the top-right corner. Thanks!
 ## Introduction
 
-Underwater detection is a crucial task to lay the foundation for the intelligent marine industry. In contrast to land scenes, targets in degraded underwater environments show ambiguous and surrounding-similar profiles, causing it challenging for generic detectors to accurately extract features. Eliminating the interference of ambiguous features is one of the primary goals when recognizing underwater objects against complex backgrounds. To this aim, we propose a novel detection framework called underwater distraction mining detector (UDMDet). UDMDet is an end-to-end detector and has two key modules: distraction-aware FPN (DAFPN) and task-aligned head (THead). DAFPN is designed to progressively refine the coarse features via mining the discrepancies between objects and backgrounds, while THead enhances the information interaction between classification and localization to make predictions with higher quality. To overcome the feature ambiguous problem, the underwater distraction-aware model is proposed to extract the differences between objects and surroundings so as to clear the target boundary. Experimental results show that UDMDet can more effectively discover objects conceal on real-world underwater images and has a higher precision outperforming the state-of-the-art detectors. 
+Underwater images commonly suffer from foreground-background ambiguity, loss of structural details, and severely reduced contrast, which collectively make underwater object detection (UOD) an inherently challenging task. To handle this issue, we present a residual-guided hierarchical calibration network (RHCNet) designed to achieve more efficient and robust UOD, which comprises a residual-guided feature enhancement module (RGFE) and a hierarchical feature calibration pyramid module (HFCP). Concretely, RHCNet extends the standard ResNet-50 backbone by embedding the RGFE, which effectively strengthens the representation of edge and texture features in blurry regions by jointly leveraging convolutional operations and attention mechanisms to achieve more discriminative feature extraction for UOD. Subsequently, the HFCP integrates a bottom-up semantic enhancement path and a top-down fine-grained feature compensation path, while a K-means clustering–guided feature calibration module is jointly employed to ensure multi-level cross-scale semantic consistency and accurate alignment of salient region features. Extensive experiments on the DUO and UTDAC benchmark datasets demonstrated that our RHCNet attains the highest AP scores of 70.5% and 50.8%, respectively. Besides, our RHCNet also maintains excellent detection accuracy and strong generalization capability on the COCO dataset for terrestrial scenarios.
 
-![pipeline](./img/model.png)
-![pipeline](./img/fm.png)
 
 
 ## Dependencies
@@ -54,18 +51,16 @@ udmdet
 ## Train
 
 ```
-$ python tools/train.py configs/udmdet/udmdet_tood_r50_fpn_anchor_based_2x_duoc.py
+$ python tools/train.py configs/rhcnet/rhcnet_tood_r50_fpn_anchor_based_2x_duoc.py
 ```
 
 ## Test
 
 ```
-$ python tools/test.py configs/udmdet/udmdet_tood_r50_fpn_anchor_based_2x_duo.py <path/to/checkpoints> --eval bbox
+$ python tools/test.py configs/rhcnet/rhcnet_tood_r50_fpn_anchor_based_2x_duo.py <path/to/checkpoints> --eval bbox
 ```
 
-## Checkpoint
 
-**DUO**: https://drive.google.com/file/d/1or3YfXaBEayxkNdrqdn1CetlOA06s3Av/view?usp=sharing
 
 
 ## Results
@@ -78,17 +73,5 @@ $ python tools/test.py configs/udmdet/udmdet_tood_r50_fpn_anchor_based_2x_duo.py
 
 Thanks MMDetection team for the wonderful open source project!
 
-## Citation
 
-```
-@ARTICLE{Yuan_2024TII_UDMDet,
-  author={Yuan, Jieyu and Cai, Zhanchuan and Cao, Wei},
-  journal={IEEE Transactions on Industrial Informatics}, 
-  title={A Novel Underwater Detection Method for Ambiguous Object Finding via Distraction Mining}, 
-  year={2024},
-  volume={},
-  number={},
-  pages={1-10},
-  doi={10.1109/TII.2024.3383537}}
-```
 
